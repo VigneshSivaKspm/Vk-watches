@@ -92,7 +92,7 @@ export const ComparePage: React.FC = () => {
                       <X className="w-4 h-4" />
                     </button>
                     <div className="space-y-3">
-                      <img
+                      <img loading="lazy" decoding="async"
                         src={watch.primaryImage}
                         alt={watch.title}
                         className="w-28 h-28 object-contain mx-auto bg-porcelain rounded-sm p-2"

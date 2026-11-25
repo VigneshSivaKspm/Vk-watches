@@ -48,7 +48,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickView }
           </span>
         )}
         {product.isNewArrival && !product.isLimitedEdition && (
-          <span className="bg-pure/90 backdrop-blur-sm border border-platinum text-charcoal text-[9px] uppercase tracking-luxury px-2 py-0.5 rounded-sm font-medium">
+          <span className="bg-pure/90 border border-platinum text-charcoal text-[9px] uppercase tracking-luxury px-2 py-0.5 rounded-sm font-medium">
             New Release
           </span>
         )}
@@ -63,7 +63,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickView }
       <div className="absolute top-3 right-3 z-10 flex flex-col gap-1.5 opacity-90 sm:opacity-0 group-hover:opacity-100 transition-opacity duration-300">
         <button
           onClick={handleWishlistClick}
-          className={`p-2 rounded-full backdrop-blur-md transition-colors shadow-sm ${
+          className={`p-2 rounded-full transition-colors shadow-sm ${
             isFavorited
               ? 'bg-gold text-pure'
               : 'bg-pure/90 hover:bg-pure text-charcoal hover:text-gold'
@@ -75,7 +75,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickView }
 
         <button
           onClick={handleCompareClick}
-          className={`p-2 rounded-full backdrop-blur-md transition-colors shadow-sm ${
+          className={`p-2 rounded-full transition-colors shadow-sm ${
             isCompared
               ? 'bg-charcoal text-pure'
               : 'bg-pure/90 hover:bg-pure text-charcoal hover:text-gold'

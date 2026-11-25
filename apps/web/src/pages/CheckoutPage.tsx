@@ -270,7 +270,7 @@ export const CheckoutPage: React.FC = () => {
               <div className="space-y-3 divide-y divide-platinum/60">
                 {items.map((item) => (
                   <div key={item.id} className="pt-3 first:pt-0 flex items-center gap-3">
-                    <img
+                    <img loading="lazy" decoding="async"
                       src={item.product.primaryImage}
                       alt={item.product.title}
                       className="w-14 h-14 object-contain bg-porcelain rounded-sm p-1 flex-shrink-0"

@@ -9,7 +9,7 @@ const strokes = [
   [94, 80, 114, 110],
 ];
 
-/** The VK monogram drawn stroke by stroke inside a sweeping bezel. */
+/** The VK monogram drawn stroke by stroke inside a sweeping bezel, using the logo gradient. */
 export const BrandMark: React.FC<{ label?: string; size?: number }> = ({ label, size = 150 }) => (
   <div className="flex flex-col items-center gap-5">
     <div className="relative" style={{ width: size, height: size }}>
@@ -21,7 +21,7 @@ export const BrandMark: React.FC<{ label?: string; size?: number }> = ({ label, 
             y1="4"
             x2="80"
             y2={i % 5 === 0 ? 14 : 9}
-            stroke="#B49A73"
+            stroke="#0299F7"
             strokeOpacity={i % 5 === 0 ? 0.95 : 0.4}
             strokeWidth={i % 5 === 0 ? 1.6 : 0.8}
             transform={`rotate(${i * 6} 80 80)`}
@@ -29,13 +29,21 @@ export const BrandMark: React.FC<{ label?: string; size?: number }> = ({ label, 
         ))}
       </svg>
       <svg viewBox="0 0 160 160" fill="none" className="absolute inset-0 w-full h-full">
-        <circle cx="80" cy="80" r="60" stroke="#B49A73" strokeWidth="1" pathLength={1} transform="rotate(-90 80 80)" className="draw-stroke" />
+        <defs>
+          <linearGradient id="vkBrandMarkGrad" x1="36" y1="80" x2="118" y2="80" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#03F008" />
+            <stop offset="35%" stopColor="#02D2C1" />
+            <stop offset="68%" stopColor="#0299F7" />
+            <stop offset="100%" stopColor="#0241FC" />
+          </linearGradient>
+        </defs>
+        <circle cx="80" cy="80" r="60" stroke="#02D2C1" strokeWidth="1" pathLength={1} transform="rotate(-90 80 80)" className="draw-stroke" />
         <g transform="translate(4 9)">
           {strokes.map(([x1, y1, x2, y2], i) => (
             <path
               key={i}
               d={`M${x1} ${y1} L${x2} ${y2}`}
-              stroke="#FAF9F6"
+              stroke="url(#vkBrandMarkGrad)"
               strokeWidth="4.5"
               strokeLinecap="square"
               pathLength={1}

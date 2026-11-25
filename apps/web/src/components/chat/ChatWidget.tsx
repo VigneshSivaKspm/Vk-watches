@@ -179,7 +179,7 @@ export const ChatWidget: React.FC = () => {
             <span className="hidden sm:block translate-x-2 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all bg-pure border border-platinum shadow-luxe rounded-full px-4 py-2 text-xs text-charcoal">
               Ask our Concierge
             </span>
-            <span className="relative flex items-center justify-center w-14 h-14 rounded-full bg-[#141312] text-gold-light border border-gold shadow-[0_12px_30px_-6px_rgba(0,0,0,0.45)]">
+            <span className="relative flex items-center justify-center w-14 h-14 rounded-full bg-[#090F1A] text-gold-light border border-brand-cyan/60 shadow-[0_12px_30px_-6px_rgba(2,65,252,0.35)]">
               <span className="absolute inset-0 rounded-full border border-gold animate-ping opacity-30" />
               <MessageCircle className="w-6 h-6" />
             </span>
@@ -201,8 +201,8 @@ export const ChatWidget: React.FC = () => {
             className="fixed z-[60] inset-0 h-[100dvh] sm:inset-auto sm:right-6 sm:bottom-6 sm:w-[400px] sm:h-[min(640px,calc(100dvh-48px))] flex flex-col bg-ivory sm:rounded-2xl sm:border border-gold/50 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.45)] overflow-hidden"
           >
             {/* Header */}
-            <header className="flex items-center gap-3 px-4 py-3 bg-[#141312] text-ivory border-b border-gold/60">
-              <img
+            <header className="flex items-center gap-3 px-4 py-3 bg-[#090F1A] text-ivory border-b border-brand-teal/40">
+              <img loading="lazy" decoding="async"
                 src={watchArt('vk-chronos-skeleton-limited-41', 'macro')}
                 alt=""
                 className="w-11 h-11 rounded-full object-cover border border-gold"

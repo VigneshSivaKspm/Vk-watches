@@ -14,7 +14,7 @@ interface PageHeroProps {
 
 /** Cinematic page banner: slow-zooming artwork with an editorial headline. */
 export const PageHero: React.FC<PageHeroProps> = ({ eyebrow, title, description, image, quote, compact, children }) => (
-  <section className="relative w-full overflow-hidden bg-[#141312] min-h-[340px] sm:min-h-[440px] flex items-center">
+  <section className="relative w-full overflow-hidden bg-[#090F1A] min-h-[340px] sm:min-h-[440px] flex items-center">
     <motion.img
       src={image}
       alt=""

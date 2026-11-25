@@ -8,10 +8,12 @@ import dotenv from 'dotenv';
 // Resolves to apps/api/.env from both src/ and dist/, whatever the working directory
 dotenv.config({ path: path.resolve(__dirname, '../../.env') });
 
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'production' && !process.env.VERCEL) {
   const problems = [
     !process.env.DATABASE_URL && 'DATABASE_URL is missing',
     (process.env.JWT_SECRET?.length ?? 0) < 32 && 'JWT_SECRET must be at least 32 characters',
   ].filter(Boolean);
   if (problems.length) throw new Error(`Invalid environment: ${problems.join('; ')}`);
+} else if (process.env.VERCEL && (process.env.JWT_SECRET?.length ?? 0) < 32) {
+  console.warn('[VK TIME API] JWT_SECRET is unset or shorter than 32 characters in Vercel environment settings.');
 }

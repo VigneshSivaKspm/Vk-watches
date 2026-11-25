@@ -30,11 +30,11 @@ export const OrderSuccessPage: React.FC = () => {
         <div className="relative w-20 h-20 mx-auto flex items-center justify-center">
           <svg className="w-full h-full animate-dial-spin-slow text-gold" viewBox="0 0 100 100">
             <circle cx="50" cy="50" r="45" fill="none" stroke="#E8E8E8" strokeWidth="2" strokeDasharray="4 6" />
-            <circle cx="50" cy="50" r="45" fill="none" stroke="#B49A73" strokeWidth="2" strokeDasharray="30 180" />
+            <circle cx="50" cy="50" r="45" fill="none" stroke="#0252FC" strokeWidth="2" strokeDasharray="30 180" />
           </svg>
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="w-12 h-12 bg-charcoal text-pure rounded-full flex items-center justify-center shadow-md animate-in zoom-in duration-700">
-              <Check className="w-6 h-6 text-gold" />
+              <Check className="w-6 h-6 text-gold-light" />
             </div>
           </div>
         </div>

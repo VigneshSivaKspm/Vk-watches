@@ -17,12 +17,12 @@ const ribbon = [
 ];
 
 export const Ribbon: React.FC = () => (
-  <div className="marquee-mask overflow-hidden bg-[#141312] py-4 border-y border-gold/30">
+  <div className="marquee-mask overflow-hidden bg-[#090F1A] py-4 border-y border-brand-teal/30">
     <div className="animate-marquee flex w-max">
       {[...ribbon, ...ribbon].map((item, i) => (
         <span key={i} className="flex items-center gap-10 pr-10 text-[11px] uppercase tracking-ultra text-ivory/85 whitespace-nowrap">
           {item}
-          <span className="w-1.5 h-1.5 rotate-45 bg-gold" />
+          <span className="w-1.5 h-1.5 rotate-45 bg-gold-light" />
         </span>
       ))}
     </div>
@@ -158,7 +158,7 @@ export const AtelierPromise: React.FC = () => (
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {promises.map((v, i) => (
           <Reveal key={v.title} delay={i * 0.12}>
-            <article className="group h-full bg-pure/85 backdrop-blur-sm border border-platinum rounded-sm p-8 text-center space-y-4 shadow-subtle hover:-translate-y-1.5 hover:shadow-luxe-hover transition-all duration-500">
+            <article className="group h-full bg-pure/95 border border-platinum rounded-sm p-8 text-center space-y-4 shadow-subtle hover:-translate-y-1.5 hover:shadow-luxe-hover transition-all duration-500">
               <div className="mx-auto w-32 h-32 rounded-full overflow-hidden border-2 border-gold/50 p-1">
                 <img
                   src={watchArt(v.watch, 'macro')}

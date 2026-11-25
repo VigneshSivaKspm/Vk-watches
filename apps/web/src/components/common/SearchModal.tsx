@@ -48,7 +48,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
 
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto">
-      <div onClick={onClose} className="fixed inset-0 bg-charcoal/50 backdrop-blur-sm transition-opacity" />
+      <div onClick={onClose} className="fixed inset-0 bg-charcoal/50 transition-opacity" />
 
       <div className="relative min-h-screen px-4 flex items-start justify-center pt-24 sm:pt-32">
         <div className="relative w-full max-w-2xl bg-pure shadow-2xl rounded-sm border border-platinum p-6 sm:p-8 animate-in zoom-in-95 duration-200">
@@ -102,7 +102,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
                     onClick={onClose}
                     className="flex items-center gap-4 p-2 hover:bg-porcelain rounded-sm transition-colors group"
                   >
-                    <img
+                    <img loading="lazy" decoding="async"
                       src={product.primaryImage}
                       alt={product.title}
                       className="w-12 h-12 object-cover bg-white rounded-sm"

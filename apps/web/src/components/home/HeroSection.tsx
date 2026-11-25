@@ -11,7 +11,7 @@ const featured = [
     name: 'Sovereign Automatic 40',
     detail: 'Calibre VK-801 • Sapphire',
     price: '₹48,500',
-    glow: 'rgba(214,181,101,0.45)',
+    glow: 'rgba(2,153,247,0.36)',
   },
   {
     slug: 'vk-navigator-diver-44',
@@ -94,7 +94,7 @@ export const HeroSection: React.FC = () => {
 
           <motion.h1 {...rise(0.28)} className="font-serif-luxury text-5xl sm:text-7xl 2xl:text-8xl text-charcoal leading-[1.02] tracking-tight">
             Time, <br />
-            <span className="italic font-normal bg-gradient-to-r from-gold-dark via-gold to-gold-dark bg-clip-text text-transparent pr-3">
+            <span className="italic font-normal bg-gradient-to-r from-brand-emerald via-brand-cyan to-brand-blue bg-clip-text text-transparent pr-3">
               Perfected.
             </span>
           </motion.h1>
@@ -138,11 +138,16 @@ export const HeroSection: React.FC = () => {
         {/* Right: live, rotating showcase */}
         <div className="lg:col-span-6 flex flex-col items-center">
           <div className="relative w-full max-w-lg h-[440px] sm:h-[clamp(390px,calc(100vh-260px),580px)]" style={{ perspective: 1100 }}>
-            <motion.div
-              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] aspect-square rounded-full blur-2xl"
-              animate={{ background: `radial-gradient(circle, ${active.glow} 0%, transparent 62%)` }}
-              transition={{ duration: 1.2 }}
-            />
+            {featured.map((item, i) => (
+              <div
+                key={item.slug}
+                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] aspect-square rounded-full transition-opacity duration-[1200ms]"
+                style={{
+                  background: `radial-gradient(circle, ${item.glow} 0%, transparent 62%)`,
+                  opacity: i === index ? 1 : 0,
+                }}
+              />
+            ))}
 
             {/* Orbiting rings */}
             <svg viewBox="0 0 500 500" className="absolute inset-0 w-full h-full text-gold" fill="none" aria-hidden="true">
@@ -181,14 +186,19 @@ export const HeroSection: React.FC = () => {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 30 }}
                 transition={{ duration: 0.45 }}
-                className="absolute bottom-2 right-0 w-56 sm:w-64 bg-pure/90 backdrop-blur-md border border-platinum p-4 rounded-sm shadow-luxe"
+                className="absolute bottom-2 right-1 sm:right-0 w-64 sm:w-72 max-w-[calc(100vw-2rem)]"
               >
-                <span className="text-[9px] uppercase tracking-ultra text-gold-dark font-medium">Featured Reference</span>
-                <p className="font-serif-luxury text-base sm:text-lg text-charcoal leading-tight">{active.name}</p>
-                <div className="flex justify-between items-center gap-2 text-[11px] text-graphite pt-1">
-                  <span>{active.detail}</span>
-                  <span className="font-medium text-charcoal">{active.price}</span>
-                </div>
+                <Link
+                  to={`/watch/${active.slug}`}
+                  className="block bg-pure/95 border border-platinum hover:border-gold p-4 rounded-sm shadow-luxe transition-colors"
+                >
+                  <span className="text-[9px] uppercase tracking-ultra text-gold-dark font-medium">Featured Reference</span>
+                  <p className="font-serif-luxury text-base sm:text-lg text-charcoal leading-tight truncate">{active.name}</p>
+                  <div className="flex justify-between items-center gap-3 text-[11px] text-graphite pt-1">
+                    <span className="truncate">{active.detail}</span>
+                    <span className="font-medium text-charcoal whitespace-nowrap flex-shrink-0">{active.price}</span>
+                  </div>
+                </Link>
               </motion.div>
             </AnimatePresence>
           </div>
@@ -205,7 +215,7 @@ export const HeroSection: React.FC = () => {
                   i === index ? 'border-gold scale-110 shadow-lg' : 'border-platinum opacity-70 hover:opacity-100'
                 }`}
               >
-                <img src={watchArt(item.slug, 'macro')} alt="" className="w-full h-full object-cover" />
+                <img src={watchArt(item.slug, 'macro')} alt="" loading="lazy" decoding="async" className="w-full h-full object-cover" />
               </button>
             ))}
           </div>

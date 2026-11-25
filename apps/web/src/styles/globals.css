@@ -11,7 +11,11 @@
     --text-charcoal: #262626;
     --text-graphite: #454545;
     --text-silver: #A4A4A4;
-    --accent-gold: #B49A73;
+    --accent-gold: #0252FC;
+    --brand-green: #03F008;
+    --brand-teal: #02D2C1;
+    --brand-cyan: #0299F7;
+    --brand-blue: #0241FC;
   }
 
   html {
@@ -45,7 +49,7 @@
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #B49A73;
+  background: #0252FC;
 }
 
 /* Editorial typography utilities */
@@ -55,7 +59,7 @@
 }
 
 .text-gold-accent {
-  color: #B49A73;
+  color: #0252FC;
 }
 
 /* Subtle watch hand animations and dials */
@@ -90,19 +94,26 @@
 .ambient-spin {
   transform-origin: center;
   animation: ambientSpin 90s linear infinite;
+  will-change: transform;
+}
+/* Pause decorative motion while scrolling, on hidden tabs and for reduced motion */
+.is-scrolling .ambient-root *,
+.ambient-static * {
+  animation-play-state: paused !important;
 }
 
 .ambient-orb {
   position: absolute;
   border-radius: 9999px;
   will-change: transform;
+  contain: layout paint;
 }
 .ambient-orb-a {
   top: -12vmax;
   left: -8vmax;
   width: 48vmax;
   height: 48vmax;
-  background: radial-gradient(circle, rgba(214, 181, 101, 0.26), transparent 65%);
+  background: radial-gradient(circle, rgba(3, 240, 8, 0.08), transparent 65%);
   animation: orbDriftA 22s ease-in-out infinite alternate;
 }
 .ambient-orb-b {
@@ -110,7 +121,7 @@
   right: -16vmax;
   width: 52vmax;
   height: 52vmax;
-  background: radial-gradient(circle, rgba(219, 171, 142, 0.22), transparent 65%);
+  background: radial-gradient(circle, rgba(2, 210, 193, 0.14), transparent 65%);
   animation: orbDriftB 28s ease-in-out infinite alternate;
 }
 .ambient-orb-c {
@@ -118,7 +129,7 @@
   left: 22vw;
   width: 46vmax;
   height: 46vmax;
-  background: radial-gradient(circle, rgba(143, 164, 196, 0.18), transparent 65%);
+  background: radial-gradient(circle, rgba(2, 65, 252, 0.11), transparent 65%);
   animation: orbDriftC 25s ease-in-out infinite alternate;
 }
 @keyframes orbDriftA {

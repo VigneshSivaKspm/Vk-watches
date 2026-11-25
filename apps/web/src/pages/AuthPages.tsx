@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../stores/useAuthStore';
 import { apiRequest } from '../services/api';
+import { VkLogo } from '../components/common/VkLogo';
 
 export const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -48,7 +49,8 @@ export const LoginPage: React.FC = () => {
     <div className="w-full min-h-screen py-16 px-4 sm:px-6 lg:px-8 flex items-center justify-center">
       <div className="max-w-md w-full bg-pure p-8 sm:p-10 border border-platinum rounded-sm shadow-luxe space-y-6">
         <div className="text-center space-y-1.5">
-          <span className="text-[10px] uppercase tracking-ultra text-gold font-medium">VK Horological Account</span>
+          <VkLogo size="md" className="mx-auto mb-2" />
+          <span className="text-[10px] uppercase tracking-ultra text-gold font-medium block">VK Horological Account</span>
           <h1 className="font-serif-luxury text-3xl text-charcoal">Sign In to Your Account</h1>
           <p className="text-xs text-silver">Access saved timepieces, order ledger, and concierge services.</p>
         </div>
@@ -159,7 +161,8 @@ export const RegisterPage: React.FC = () => {
     <div className="w-full min-h-screen py-16 px-4 sm:px-6 lg:px-8 flex items-center justify-center">
       <div className="max-w-md w-full bg-pure p-8 sm:p-10 border border-platinum rounded-sm shadow-luxe space-y-6">
         <div className="text-center space-y-1.5">
-          <span className="text-[10px] uppercase tracking-ultra text-gold font-medium">New Client Registration</span>
+          <VkLogo size="md" className="mx-auto mb-2" />
+          <span className="text-[10px] uppercase tracking-ultra text-gold font-medium block">New Client Registration</span>
           <h1 className="font-serif-luxury text-3xl text-charcoal">Join VK TIME</h1>
           <p className="text-xs text-silver">Receive bespoke release invitations and lifetime warranty registration.</p>
         </div>

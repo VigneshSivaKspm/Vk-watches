@@ -188,7 +188,7 @@ export const AnatomyOfPrecision: React.FC = () => {
                   }`}
                 >
                   <span className="truncate">{spot.name.split(' ')[0]} {spot.name.split(' ')[1]}</span>
-                  <ChevronRight className={`w-3.5 h-3.5 ${activeHotspot.id === spot.id ? 'text-gold' : 'text-silver'}`} />
+                  <ChevronRight className={`w-3.5 h-3.5 ${activeHotspot.id === spot.id ? 'text-gold-light' : 'text-silver'}`} />
                 </button>
               ))}
             </div>

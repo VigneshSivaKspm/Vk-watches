@@ -36,14 +36,14 @@ export const CraftsmanshipPage: React.FC = () => {
               </div>
             </div>
           </div>
-          <div className="lg:col-span-6 relative aspect-[4/3] rounded-sm overflow-hidden shadow-luxe-hover bg-[#141312]">
+          <div className="lg:col-span-6 relative aspect-[4/3] rounded-sm overflow-hidden shadow-luxe-hover bg-[#090F1A]">
             <LiveWatch slug="vk-chronos-skeleton-limited-41" view="macro" className="absolute inset-0" />
           </div>
         </div>
 
         {/* Pillar 02: Thermal Bluing */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          <div className="lg:col-span-6 order-2 lg:order-1 relative aspect-[4/3] rounded-sm overflow-hidden shadow-luxe-hover bg-[#141312]">
+          <div className="lg:col-span-6 order-2 lg:order-1 relative aspect-[4/3] rounded-sm overflow-hidden shadow-luxe-hover bg-[#090F1A]">
             <LiveWatch slug="vk-sovereign-automatic-40" view="macro" className="absolute inset-0" />
           </div>
           <div className="lg:col-span-6 order-1 lg:order-2 space-y-5">
@@ -68,7 +68,7 @@ export const CraftsmanshipPage: React.FC = () => {
               Synthesized by the Verneuil fusion process, our sapphire crystals register 9 on the Mohs scale, outmatched only by natural diamond. Treated with seven microscopic coats of anti-reflective pigment on both internal and external radii, the glass vanishes under ordinary glance, presenting an unencumbered view of the dial.
             </p>
           </div>
-          <div className="lg:col-span-6 relative aspect-[4/3] rounded-sm overflow-hidden shadow-luxe-hover bg-[#141312]">
+          <div className="lg:col-span-6 relative aspect-[4/3] rounded-sm overflow-hidden shadow-luxe-hover bg-[#090F1A]">
             <img src="/images/scenes/journal-sapphire.svg" alt="Sapphire crystal facets" loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
           </div>
         </div>

@@ -43,7 +43,7 @@ export const JournalPage: React.FC = () => {
                 className="group bg-pure border border-platinum rounded-sm overflow-hidden flex flex-col justify-between hover:shadow-luxe-hover transition-all duration-500"
               >
                 <div className="aspect-[16/10] overflow-hidden bg-porcelain">
-                  <img
+                  <img loading="lazy" decoding="async"
                     src={article.coverImage}
                     alt={article.title}
                     className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"

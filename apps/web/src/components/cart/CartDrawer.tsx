@@ -58,7 +58,7 @@ export const CartDrawer: React.FC = () => {
       {/* Backdrop */}
       <div
         onClick={() => setIsOpen(false)}
-        className="absolute inset-0 bg-charcoal/40 backdrop-blur-sm transition-opacity"
+        className="absolute inset-0 bg-charcoal/40 transition-opacity"
       />
 
       {/* Drawer */}
@@ -100,7 +100,7 @@ export const CartDrawer: React.FC = () => {
             ) : (
               items.map((item) => (
                 <div key={item.id} className="py-4 flex gap-4 items-center">
-                  <img
+                  <img loading="lazy" decoding="async"
                     src={item.product.primaryImage}
                     alt={item.product.title}
                     className="w-20 h-20 object-cover bg-porcelain rounded-sm flex-shrink-0"

@@ -160,7 +160,7 @@ export const WatchFinderPage: React.FC = () => {
                       cy="18"
                       r="16"
                       fill="none"
-                      stroke="#B49A73"
+                      stroke="#0252FC"
                       strokeWidth="2.5"
                       strokeDasharray="100"
                       strokeDashoffset={100 - progressPercent}

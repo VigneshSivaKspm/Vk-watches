@@ -43,6 +43,19 @@ export default defineConfig(({ mode }) => {
         '@vk-time/shared': path.resolve(__dirname, '../../packages/shared/src'),
       },
     },
+    build: {
+      target: 'es2020',
+      chunkSizeWarningLimit: 600,
+      rollupOptions: {
+        output: {
+          // Long-lived vendor chunks cache across deploys
+          manualChunks: {
+            react: ['react', 'react-dom', 'react-router-dom'],
+            motion: ['framer-motion'],
+          },
+        },
+      },
+    },
     server: {
       port: 5173,
       proxy: {

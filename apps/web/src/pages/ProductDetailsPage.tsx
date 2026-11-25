@@ -158,7 +158,7 @@ export const ProductDetailsPage: React.FC = () => {
                     : 'border-platinum hover:border-silver'
                 }`}
               >
-                <img src={img} alt={`Thumbnail ${i}`} className="w-full h-full object-cover" />
+                <img loading="lazy" decoding="async" src={img} alt={`Thumbnail ${i}`} className="w-full h-full object-cover" />
               </button>
             ))}
           </div>
@@ -316,9 +316,9 @@ export const ProductDetailsPage: React.FC = () => {
               <div className="bg-pure p-6 rounded-sm border border-platinum space-y-3">
                 <svg className="w-20 h-20 mx-auto text-charcoal" viewBox="0 0 100 100" fill="none">
                   <circle cx="50" cy="50" r="40" stroke="currentColor" strokeWidth="1.5" />
-                  <line x1="10" y1="50" x2="90" y2="50" stroke="#B49A73" strokeWidth="1" strokeDasharray="3 3" />
-                  <circle cx="10" cy="50" r="2" fill="#B49A73" />
-                  <circle cx="90" cy="50" r="2" fill="#B49A73" />
+                  <line x1="10" y1="50" x2="90" y2="50" stroke="#0252FC" strokeWidth="1" strokeDasharray="3 3" />
+                  <circle cx="10" cy="50" r="2" fill="#0252FC" />
+                  <circle cx="90" cy="50" r="2" fill="#0252FC" />
                 </svg>
                 <p className="font-serif-luxury text-2xl text-charcoal">{specs.caseDiameterMm} mm</p>
                 <p className="text-[10px] uppercase tracking-wider text-silver">Case Diameter</p>
@@ -328,9 +328,9 @@ export const ProductDetailsPage: React.FC = () => {
               <div className="bg-pure p-6 rounded-sm border border-platinum space-y-3">
                 <svg className="w-20 h-20 mx-auto text-charcoal" viewBox="0 0 100 100" fill="none">
                   <rect x="25" y="30" width="50" height="40" rx="3" stroke="currentColor" strokeWidth="1.5" />
-                  <line x1="50" y1="30" x2="50" y2="70" stroke="#B49A73" strokeWidth="1" strokeDasharray="3 3" />
-                  <circle cx="50" cy="30" r="2" fill="#B49A73" />
-                  <circle cx="50" cy="70" r="2" fill="#B49A73" />
+                  <line x1="50" y1="30" x2="50" y2="70" stroke="#0252FC" strokeWidth="1" strokeDasharray="3 3" />
+                  <circle cx="50" cy="30" r="2" fill="#0252FC" />
+                  <circle cx="50" cy="70" r="2" fill="#0252FC" />
                 </svg>
                 <p className="font-serif-luxury text-2xl text-charcoal">{specs.caseThicknessMm} mm</p>
                 <p className="text-[10px] uppercase tracking-wider text-silver">Case Thickness</p>
@@ -342,7 +342,7 @@ export const ProductDetailsPage: React.FC = () => {
                   <line x1="30" y1="15" x2="70" y2="15" stroke="currentColor" strokeWidth="1.5" />
                   <line x1="30" y1="85" x2="70" y2="85" stroke="currentColor" strokeWidth="1.5" />
                   <circle cx="50" cy="50" r="25" stroke="currentColor" strokeWidth="1" strokeDasharray="2 2" />
-                  <line x1="50" y1="15" x2="50" y2="85" stroke="#B49A73" strokeWidth="1" />
+                  <line x1="50" y1="15" x2="50" y2="85" stroke="#0252FC" strokeWidth="1" />
                 </svg>
                 <p className="font-serif-luxury text-2xl text-charcoal">{specs.lugToLugMm} mm</p>
                 <p className="text-[10px] uppercase tracking-wider text-silver">Lug-To-Lug Span</p>
@@ -351,7 +351,7 @@ export const ProductDetailsPage: React.FC = () => {
               {/* Water Resistance */}
               <div className="bg-pure p-6 rounded-sm border border-platinum space-y-3">
                 <svg className="w-20 h-20 mx-auto text-charcoal" viewBox="0 0 100 100" fill="none">
-                  <path d="M50 20 C50 20 25 55 25 70 A25 25 0 0 0 75 70 C75 55 50 20 50 20 Z" stroke="#B49A73" strokeWidth="1.5" />
+                  <path d="M50 20 C50 20 25 55 25 70 A25 25 0 0 0 75 70 C75 55 50 20 50 20 Z" stroke="#0252FC" strokeWidth="1.5" />
                   <text x="50" y="75" textAnchor="middle" fill="#262626" fontSize="12" fontWeight="500">
                     {specs.waterResistanceAtm} ATM
                   </text>
@@ -460,7 +460,7 @@ export const ProductDetailsPage: React.FC = () => {
       )}
 
       {/* Sticky Mobile Add-to-Cart Bar */}
-      <div className="fixed bottom-0 inset-x-0 bg-pure/95 backdrop-blur-md border-t border-platinum p-4 z-40 lg:hidden flex items-center justify-between shadow-2xl">
+      <div className="fixed bottom-0 inset-x-0 bg-pure/95 border-t border-platinum p-4 z-40 lg:hidden flex items-center justify-between shadow-2xl">
         <div>
           <p className="font-serif-luxury text-lg text-charcoal line-clamp-1">{product.title}</p>
           <p className="text-xs font-medium text-gold">₹{product.price.toLocaleString('en-IN')}</p>
@@ -476,14 +476,14 @@ export const ProductDetailsPage: React.FC = () => {
 
       {/* Fullscreen Image Lightbox Modal */}
       {fullscreenImage && createPortal(
-        <div className="fixed inset-0 z-[120] bg-charcoal/95 flex items-center justify-center p-6 backdrop-blur-md">
+        <div className="fixed inset-0 z-[120] bg-charcoal/95 flex items-center justify-center p-6">
           <button
             onClick={() => setFullscreenImage(null)}
             className="absolute top-6 right-6 p-2 text-pure hover:text-gold"
           >
             <X className="w-8 h-8" />
           </button>
-          <img
+          <img loading="lazy" decoding="async"
             src={fullscreenImage}
             alt="Fullscreen preview"
             className="w-[min(92vw,85vh)] h-[min(92vw,85vh)] object-contain drop-shadow-2xl"

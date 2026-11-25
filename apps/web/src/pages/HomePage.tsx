@@ -92,7 +92,7 @@ export const HomePage: React.FC = () => {
       <section className="py-24 bg-pure/60 border-t border-platinum overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <Reveal x={-40} y={0} className="lg:col-span-6">
-            <div className="relative aspect-square rounded-sm overflow-hidden shadow-luxe-hover bg-[#141312]">
+            <div className="relative aspect-square rounded-sm overflow-hidden shadow-luxe-hover bg-[#090F1A]">
               <LiveWatch slug="vk-chronos-skeleton-limited-41" view="macro" className="absolute inset-0" />
               <span className="absolute left-4 bottom-4 text-[9px] uppercase tracking-ultra text-gold-light bg-black/60 px-3 py-1.5 rounded-sm">
                 Live Calibre &bull; Real Time
@@ -143,32 +143,32 @@ export const HomePage: React.FC = () => {
       <WatchGallery />
 
       {/* 09. Interactive Tools Banner (Watch Finder & Size Guide) */}
-      <section className="relative py-24 bg-[#141312] text-pure overflow-hidden">
+      <section className="relative py-24 bg-[#090F1A] text-pure overflow-hidden">
         <img src={sceneArt('hero-automatic')} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover opacity-30" />
         <div className="relative max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-          <div className="p-8 border border-gold/30 rounded-sm space-y-4 bg-charcoal/70 backdrop-blur-md hover:-translate-y-1 transition-transform">
-            <Compass className="w-6 h-6 text-gold" />
+          <div className="p-8 border border-gold-light/30 rounded-sm space-y-4 bg-charcoal/85 hover:-translate-y-1 transition-transform">
+            <Compass className="w-6 h-6 text-gold-light" />
             <h3 className="font-serif-luxury text-2xl sm:text-3xl">Personalised Watch Finder</h3>
             <p className="text-xs text-pure/70 leading-relaxed font-light">
               Answer 7 curated questions to discover the exact timepiece tailored to your wrist anatomy, aesthetic taste, and occasion.
             </p>
             <Link
               to="/watch-finder"
-              className="inline-block pt-2 text-xs uppercase tracking-wider text-gold hover:text-pure underline underline-offset-4"
+              className="inline-block pt-2 text-xs uppercase tracking-wider text-gold-light hover:text-pure underline underline-offset-4"
             >
               Launch Watch Finder Quiz &rarr;
             </Link>
           </div>
 
-          <div className="p-8 border border-gold/30 rounded-sm space-y-4 bg-charcoal/70 backdrop-blur-md hover:-translate-y-1 transition-transform">
-            <SlidersHorizontal className="w-6 h-6 text-gold" />
+          <div className="p-8 border border-gold-light/30 rounded-sm space-y-4 bg-charcoal/85 hover:-translate-y-1 transition-transform">
+            <SlidersHorizontal className="w-6 h-6 text-gold-light" />
             <h3 className="font-serif-luxury text-2xl sm:text-3xl">Interactive Watch Size Guide</h3>
             <p className="text-xs text-pure/70 leading-relaxed font-light">
               Use our interactive wrist-slider to visualize how 34mm, 38mm, 40mm, and 42mm cases sit on different wrist circumferences.
             </p>
             <Link
               to="/size-guide"
-              className="inline-block pt-2 text-xs uppercase tracking-wider text-gold hover:text-pure underline underline-offset-4"
+              className="inline-block pt-2 text-xs uppercase tracking-wider text-gold-light hover:text-pure underline underline-offset-4"
             >
               Explore Sizing Guide &rarr;
             </Link>
@@ -205,7 +205,7 @@ export const HomePage: React.FC = () => {
                 className="group flex flex-col space-y-4"
               >
                 <div className="overflow-hidden rounded-sm aspect-[16/10] bg-porcelain">
-                  <img
+                  <img loading="lazy" decoding="async"
                     src={article.coverImage}
                     alt={article.title}
                     className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"

@@ -95,7 +95,7 @@ export const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, onClose }) => (
               >
                 <Link to={s.to} onClick={onClose} className="group block">
                   <div className="shine rounded-sm aspect-square bg-porcelain">
-                    <img
+                    <img loading="lazy" decoding="async"
                       src={s.image}
                       alt={s.name}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"

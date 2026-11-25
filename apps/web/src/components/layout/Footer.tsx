@@ -29,7 +29,7 @@ export const Footer: React.FC = () => {
 
   return (
     <footer className="relative z-10 bg-pure text-charcoal border-t border-platinum pt-16 pb-12 mt-auto">
-      <div className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-transparent via-gold to-transparent" />
+      <div className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-[#03F008] via-[#02D2C1] to-[#0241FC] opacity-80" />
       {/* Horological Trust Value Pillars */}
       <div className="max-w-7xl mx-auto px-6 mb-16 pb-12 border-b border-platinum">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">

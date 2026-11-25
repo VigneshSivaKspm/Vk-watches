@@ -140,7 +140,7 @@ export const TrackOrderPage: React.FC = () => {
               <div className="space-y-3">
                 {order.items?.map((item: any) => (
                   <div key={item.id} className="flex items-center gap-4 p-3 bg-ivory/50 rounded-sm">
-                    <img src={item.image} alt={item.productTitle} className="w-12 h-12 object-contain bg-white rounded-sm" />
+                    <img loading="lazy" decoding="async" src={item.image} alt={item.productTitle} className="w-12 h-12 object-contain bg-white rounded-sm" />
                     <div className="flex-1 min-w-0">
                       <p className="text-xs font-medium text-charcoal truncate">{item.productTitle}</p>
                       <p className="text-[10px] text-silver">{item.selectedDial} &bull; Qty: {item.quantity}</p>

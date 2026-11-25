@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Suspense, lazy, useEffect, useState } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { Navbar } from '../components/layout/Navbar';
 import { Footer } from '../components/layout/Footer';
@@ -7,58 +7,93 @@ import { SearchModal } from '../components/common/SearchModal';
 import { BackgroundWatchAesthetics } from '../components/common/BackgroundWatchAesthetics';
 import { PageStage, usePageTransition } from '../animations/transitions';
 import { Preloader } from '../components/common/Preloader';
-import { ChatWidget } from '../components/chat/ChatWidget';
 
 // Storefront Pages
 import { HomePage } from '../pages/HomePage';
-import { ShopPage } from '../pages/ShopPage';
-import { CollectionsPage } from '../pages/CollectionsPage';
-import { CollectionDetailPage } from '../pages/CollectionDetailPage';
-import { ProductDetailsPage } from '../pages/ProductDetailsPage';
-import { ComparePage } from '../pages/ComparePage';
-import { WatchFinderPage } from '../pages/WatchFinderPage';
-import { SizeGuidePage } from '../pages/SizeGuidePage';
-import { CraftsmanshipPage } from '../pages/CraftsmanshipPage';
-import { JournalPage } from '../pages/JournalPage';
-import { JournalArticlePage } from '../pages/JournalArticlePage';
-import { AboutPage } from '../pages/AboutPage';
-import { WatchCarePage, WarrantyPage } from '../pages/WatchCarePage';
-import { ContactPage } from '../pages/ContactPage';
-import { FaqPage } from '../pages/FaqPage';
-import { CartPage } from '../pages/CartPage';
-import { CheckoutPage } from '../pages/CheckoutPage';
-import { OrderSuccessPage } from '../pages/OrderSuccessPage';
-import { TrackOrderPage } from '../pages/TrackOrderPage';
-import { WishlistPage } from '../pages/WishlistPage';
-import { LoginPage, RegisterPage } from '../pages/AuthPages';
-import { AccountPage } from '../pages/AccountPage';
-import {
-  MenPage,
-  WomenPage,
-  UnisexPage,
-  NewArrivalsPage,
-  BestsellersPage,
-  LimitedEditionPage,
-  SearchPage,
-} from '../pages/CategoryPages';
-import {
-  ShippingPolicyPage,
-  ReturnPolicyPage,
-  PrivacyPolicyPage,
-  TermsPage,
-} from '../pages/PolicyPages';
-import { NotFoundPage } from '../pages/NotFoundPage';
 
-// Admin Panel
-import { AdminLayout } from '../admin/AdminLayout';
-import { AdminLogin } from '../admin/AdminLogin';
-import { AdminDashboard } from '../admin/AdminDashboard';
-import { AdminProducts } from '../admin/AdminProducts';
-import { AdminOrders } from '../admin/AdminOrders';
-import { AdminCoupons, AdminSettings } from '../admin/AdminCoupons';
+// Route-level code splitting: each page is fetched only when first visited
+const ChatWidget = lazy(() => import('../components/chat/ChatWidget').then((m) => ({ default: m.ChatWidget })));
+const ShopPage = lazy(() => import('../pages/ShopPage').then((m) => ({ default: m.ShopPage })));
+const CollectionsPage = lazy(() => import('../pages/CollectionsPage').then((m) => ({ default: m.CollectionsPage })));
+const CollectionDetailPage = lazy(() => import('../pages/CollectionDetailPage').then((m) => ({ default: m.CollectionDetailPage })));
+const ProductDetailsPage = lazy(() => import('../pages/ProductDetailsPage').then((m) => ({ default: m.ProductDetailsPage })));
+const ComparePage = lazy(() => import('../pages/ComparePage').then((m) => ({ default: m.ComparePage })));
+const WatchFinderPage = lazy(() => import('../pages/WatchFinderPage').then((m) => ({ default: m.WatchFinderPage })));
+const SizeGuidePage = lazy(() => import('../pages/SizeGuidePage').then((m) => ({ default: m.SizeGuidePage })));
+const CraftsmanshipPage = lazy(() => import('../pages/CraftsmanshipPage').then((m) => ({ default: m.CraftsmanshipPage })));
+const JournalPage = lazy(() => import('../pages/JournalPage').then((m) => ({ default: m.JournalPage })));
+const JournalArticlePage = lazy(() => import('../pages/JournalArticlePage').then((m) => ({ default: m.JournalArticlePage })));
+const AboutPage = lazy(() => import('../pages/AboutPage').then((m) => ({ default: m.AboutPage })));
+const WatchCarePage = lazy(() => import('../pages/WatchCarePage').then((m) => ({ default: m.WatchCarePage })));
+const WarrantyPage = lazy(() => import('../pages/WatchCarePage').then((m) => ({ default: m.WarrantyPage })));
+const ContactPage = lazy(() => import('../pages/ContactPage').then((m) => ({ default: m.ContactPage })));
+const FaqPage = lazy(() => import('../pages/FaqPage').then((m) => ({ default: m.FaqPage })));
+const CartPage = lazy(() => import('../pages/CartPage').then((m) => ({ default: m.CartPage })));
+const CheckoutPage = lazy(() => import('../pages/CheckoutPage').then((m) => ({ default: m.CheckoutPage })));
+const OrderSuccessPage = lazy(() => import('../pages/OrderSuccessPage').then((m) => ({ default: m.OrderSuccessPage })));
+const TrackOrderPage = lazy(() => import('../pages/TrackOrderPage').then((m) => ({ default: m.TrackOrderPage })));
+const WishlistPage = lazy(() => import('../pages/WishlistPage').then((m) => ({ default: m.WishlistPage })));
+const LoginPage = lazy(() => import('../pages/AuthPages').then((m) => ({ default: m.LoginPage })));
+const RegisterPage = lazy(() => import('../pages/AuthPages').then((m) => ({ default: m.RegisterPage })));
+const AccountPage = lazy(() => import('../pages/AccountPage').then((m) => ({ default: m.AccountPage })));
+const MenPage = lazy(() => import('../pages/CategoryPages').then((m) => ({ default: m.MenPage })));
+const WomenPage = lazy(() => import('../pages/CategoryPages').then((m) => ({ default: m.WomenPage })));
+const UnisexPage = lazy(() => import('../pages/CategoryPages').then((m) => ({ default: m.UnisexPage })));
+const NewArrivalsPage = lazy(() => import('../pages/CategoryPages').then((m) => ({ default: m.NewArrivalsPage })));
+const BestsellersPage = lazy(() => import('../pages/CategoryPages').then((m) => ({ default: m.BestsellersPage })));
+const LimitedEditionPage = lazy(() => import('../pages/CategoryPages').then((m) => ({ default: m.LimitedEditionPage })));
+const SearchPage = lazy(() => import('../pages/CategoryPages').then((m) => ({ default: m.SearchPage })));
+const ShippingPolicyPage = lazy(() => import('../pages/PolicyPages').then((m) => ({ default: m.ShippingPolicyPage })));
+const ReturnPolicyPage = lazy(() => import('../pages/PolicyPages').then((m) => ({ default: m.ReturnPolicyPage })));
+const PrivacyPolicyPage = lazy(() => import('../pages/PolicyPages').then((m) => ({ default: m.PrivacyPolicyPage })));
+const TermsPage = lazy(() => import('../pages/PolicyPages').then((m) => ({ default: m.TermsPage })));
+const NotFoundPage = lazy(() => import('../pages/NotFoundPage').then((m) => ({ default: m.NotFoundPage })));
+const AdminLayout = lazy(() => import('../admin/AdminLayout').then((m) => ({ default: m.AdminLayout })));
+const AdminLogin = lazy(() => import('../admin/AdminLogin').then((m) => ({ default: m.AdminLogin })));
+const AdminDashboard = lazy(() => import('../admin/AdminDashboard').then((m) => ({ default: m.AdminDashboard })));
+const AdminProducts = lazy(() => import('../admin/AdminProducts').then((m) => ({ default: m.AdminProducts })));
+const AdminOrders = lazy(() => import('../admin/AdminOrders').then((m) => ({ default: m.AdminOrders })));
+const AdminCoupons = lazy(() => import('../admin/AdminCoupons').then((m) => ({ default: m.AdminCoupons })));
+const AdminSettings = lazy(() => import('../admin/AdminCoupons').then((m) => ({ default: m.AdminSettings })));
+
+// Warm the storefront chunks once the browser is idle so navigation never waits on the network
+const prefetchStorefront = () => {
+  Promise.all([
+    import('../pages/AboutPage'),
+    import('../pages/AccountPage'),
+    import('../pages/AuthPages'),
+    import('../pages/CartPage'),
+    import('../pages/CategoryPages'),
+    import('../pages/CheckoutPage'),
+    import('../pages/CollectionDetailPage'),
+    import('../pages/CollectionsPage'),
+    import('../pages/ComparePage'),
+    import('../pages/ContactPage'),
+    import('../pages/CraftsmanshipPage'),
+    import('../pages/FaqPage'),
+    import('../pages/JournalArticlePage'),
+    import('../pages/JournalPage'),
+    import('../pages/NotFoundPage'),
+    import('../pages/OrderSuccessPage'),
+    import('../pages/PolicyPages'),
+    import('../pages/ProductDetailsPage'),
+    import('../pages/ShopPage'),
+    import('../pages/SizeGuidePage'),
+    import('../pages/TrackOrderPage'),
+    import('../pages/WatchCarePage'),
+    import('../pages/WatchFinderPage'),
+    import('../pages/WishlistPage'),
+  ]).catch(() => undefined);
+};
 
 export const AppRoutes: React.FC = () => {
   const [searchOpen, setSearchOpen] = useState(false);
+
+  useEffect(() => {
+    const w = window as Window & { requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number };
+    if (w.requestIdleCallback) w.requestIdleCallback(prefetchStorefront, { timeout: 4000 });
+    else setTimeout(prefetchStorefront, 2500);
+  }, []);
   const { displayLocation, overlay } = usePageTransition();
   const isAdmin = displayLocation.pathname.startsWith('/admin');
 
@@ -77,6 +112,7 @@ export const AppRoutes: React.FC = () => {
       {/* Main Content with Unique Watch Route Transitions */}
       <div className="flex-1 flex flex-col relative z-10">
         <PageStage key={displayLocation.pathname} pathname={displayLocation.pathname}>
+          <Suspense fallback={<div className="flex-1 min-h-[60vh]" />}>
           <Routes location={displayLocation}>
             {/* Customer Storefront Routes */}
             <Route path="/" element={<HomePage />} />
@@ -156,6 +192,7 @@ export const AppRoutes: React.FC = () => {
             <Route path="/404" element={<NotFoundPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
+          </Suspense>
         </PageStage>
       </div>
 
@@ -166,7 +203,11 @@ export const AppRoutes: React.FC = () => {
       {!isAdmin && <CartDrawer />}
 
       {/* AI Concierge Chat */}
-      {!isAdmin && <ChatWidget />}
+      {!isAdmin && (
+        <Suspense fallback={null}>
+          <ChatWidget />
+        </Suspense>
+      )}
 
       {/* Live Search Modal */}
       {!isAdmin && <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />}

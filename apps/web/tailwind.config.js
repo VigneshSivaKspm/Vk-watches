@@ -14,10 +14,18 @@ export default {
         charcoal: '#262626',
         graphite: '#454545',
         silver: '#A4A4A4',
+        brand: {
+          green: '#03F008',
+          emerald: '#00A846',
+          teal: '#02D2C1',
+          cyan: '#0299F7',
+          blue: '#0241FC',
+          cobalt: '#0132C9',
+        },
         gold: {
-          light: '#D4C3A3',
-          DEFAULT: '#B49A73',
-          dark: '#8C7551',
+          light: '#02D2C1',
+          DEFAULT: '#0252FC',
+          dark: '#0132C9',
         },
       },
       fontFamily: {
@@ -33,7 +41,7 @@ export default {
       boxShadow: {
         subtle: '0 2px 10px rgba(0, 0, 0, 0.03)',
         luxe: '0 10px 35px -5px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(0, 0, 0, 0.02)',
-        'luxe-hover': '0 20px 45px -10px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.04)',
+        'luxe-hover': '0 20px 45px -10px rgba(2, 65, 252, 0.10), 0 0 0 1px rgba(2, 153, 247, 0.12)',
       },
       animation: {
         'dial-spin-slow': 'dialSpin 120s linear infinite',

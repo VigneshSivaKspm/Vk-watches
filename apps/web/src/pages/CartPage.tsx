@@ -89,7 +89,7 @@ export const CartPage: React.FC = () => {
           <div className="lg:col-span-8 bg-pure p-6 rounded-sm border border-platinum divide-y divide-platinum">
             {items.map((item) => (
               <div key={item.id} className="py-6 flex flex-col sm:flex-row items-center gap-6">
-                <img
+                <img loading="lazy" decoding="async"
                   src={item.product.primaryImage}
                   alt={item.product.title}
                   className="w-24 h-24 object-contain bg-porcelain rounded-sm p-2 flex-shrink-0"

@@ -12,8 +12,8 @@
     "dev": "concurrently -n \"API,WEB\" -c \"cyan,magenta\" \"npm run dev:api\" \"npm run dev:web\"",
     "dev:web": "npm run dev --workspace=apps/web",
     "dev:api": "npm run dev --workspace=apps/api",
-    "build": "npm run build --workspace=packages/shared && npm run build --workspace=apps/api && npm run seo && npm run build --workspace=apps/web",
-    "build:web": "npm run seo && npm run build --workspace=apps/web",
+    "build": "npm run build --workspace=packages/shared && npm run build --workspace=apps/api && npm run catalogue && npm run seo && npm run build --workspace=apps/web",
+    "build:web": "npm run catalogue && npm run seo && npm run build --workspace=apps/web",
     "build:api": "npm run build --workspace=apps/api",
     "lint": "npm run lint --workspace=apps/web && npm run lint --workspace=apps/api",
     "typecheck": "npm run typecheck --workspace=apps/web && npm run typecheck --workspace=apps/api",
@@ -22,6 +22,7 @@
     "db:push": "npm run db:push --workspace=apps/api",
     "db:seed": "npm run db:seed --workspace=apps/api",
     "art": "tsx scripts/generate-art.ts",
+    "catalogue": "tsx scripts/generate-catalogue.ts",
     "seo": "tsx scripts/generate-seo.ts"
   },
   "devDependencies": {

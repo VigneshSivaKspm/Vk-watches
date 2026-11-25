@@ -28,7 +28,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenSearch }) => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
-    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -68,8 +69,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenSearch }) => {
         onMouseLeave={() => setMegaMenuOpen(false)}
         className={`sticky top-0 w-full z-40 transition-all duration-300 ${
           isScrolled
-            ? 'bg-pure/95 backdrop-blur-md shadow-subtle py-2.5 border-b border-platinum'
-            : 'bg-pure/90 backdrop-blur-sm py-4 border-b border-platinum/60'
+            ? 'bg-pure/95 shadow-subtle py-2.5 border-b border-platinum'
+            : 'bg-pure/95 py-4 border-b border-platinum/60'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
@@ -100,7 +101,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenSearch }) => {
                 </Link>
                 {/* Watch-hand animated fine underline */}
                 <span
-                  className={`absolute bottom-0 left-0 h-[1.5px] bg-gold transition-all duration-300 ease-out ${
+                  className={`absolute bottom-0 left-0 h-[1.5px] bg-gradient-to-r from-[#03F008] via-[#02D2C1] to-[#0241FC] transition-all duration-300 ease-out ${
                     location.pathname === link.path ? 'w-full' : 'w-0 group-hover:w-full'
                   }`}
                 />

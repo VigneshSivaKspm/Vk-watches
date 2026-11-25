@@ -280,7 +280,7 @@ export const ShopPage: React.FC = () => {
       {/* Quick View Modal */}
       {quickViewProduct && createPortal(
         <div className="fixed inset-0 z-[120] overflow-y-auto">
-          <div onClick={() => setQuickViewProduct(null)} className="fixed inset-0 bg-charcoal/50 backdrop-blur-sm" />
+          <div onClick={() => setQuickViewProduct(null)} className="fixed inset-0 bg-charcoal/50" />
           <div className="relative min-h-screen px-4 flex items-center justify-center p-4">
             <div className="relative w-full max-w-3xl bg-pure rounded-sm shadow-2xl border border-platinum p-6 sm:p-8 animate-in zoom-in-95 duration-200">
               <button
@@ -291,7 +291,7 @@ export const ShopPage: React.FC = () => {
               </button>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                <img
+                <img loading="lazy" decoding="async"
                   src={quickViewProduct.primaryImage}
                   alt={quickViewProduct.title}
                   className="w-full aspect-square object-cover bg-porcelain rounded-sm"

@@ -7,242 +7,40 @@ import { BrandMark } from '../components/common/BrandMark';
  * VK TIME Centralized Route Transition Registry
  * Every major route gets a custom horological animation signature.
  */
+/*
+ * Entrance choreography per route. Only opacity + a small translate are used:
+ * these run on the GPU. Blur filters and scale/rotate on a whole page force the
+ * browser to re-rasterise it every frame, which is what made navigation stutter.
+ */
+const EASE_OUT = [0.16, 1, 0.3, 1] as const;
+const fade = (x = 0, y = 0, duration = 0.4): Variants => ({
+  initial: { opacity: 0, x, y },
+  animate: { opacity: 1, x: 0, y: 0, transition: { duration, ease: EASE_OUT } },
+  exit: { opacity: 0, transition: { duration: 0.2 } },
+});
+
 export const routeTransitionVariants: Record<string, Variants> = {
-  // 1. Home: Timepiece Assembly Reveal
-  home: {
-    initial: { opacity: 0, scale: 0.98, filter: 'blur(4px)' },
-    animate: {
-      opacity: 1,
-      scale: 1,
-      filter: 'blur(0px)',
-      transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] },
-    },
-    exit: { opacity: 0, scale: 1.01, transition: { duration: 0.3 } },
-  },
-
-  // 2. Shop: Chronograph Sweep (Staggered horizontal sweep)
-  shop: {
-    initial: { opacity: 0, x: -16, filter: 'blur(2px)' },
-    animate: {
-      opacity: 1,
-      x: 0,
-      filter: 'blur(0px)',
-      transition: { duration: 0.45, ease: [0.25, 1, 0.5, 1] },
-    },
-    exit: { opacity: 0, x: 12, transition: { duration: 0.25 } },
-  },
-
-  // 3. Collections: Rotating Bezel Reveal
-  collections: {
-    initial: { opacity: 0, rotate: -1.5, scale: 0.98 },
-    animate: {
-      opacity: 1,
-      rotate: 0,
-      scale: 1,
-      transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] },
-    },
-    exit: { opacity: 0, rotate: 1, transition: { duration: 0.25 } },
-  },
-
-  // 4. Collection Slug: Radial Dial Expansion
-  collectionSlug: {
-    initial: { opacity: 0, scale: 0.96 },
-    animate: {
-      opacity: 1,
-      scale: 1,
-      transition: { duration: 0.48, ease: [0.19, 1, 0.22, 1] },
-    },
-    exit: { opacity: 0, scale: 1.02, transition: { duration: 0.25 } },
-  },
-
-  // 5. Men's Watches: Precision Steel Slide
-  men: {
-    initial: { opacity: 0, x: -24 },
-    animate: {
-      opacity: 1,
-      x: 0,
-      transition: { duration: 0.42, ease: [0.2, 0.8, 0.2, 1] },
-    },
-    exit: { opacity: 0, x: 20, transition: { duration: 0.25 } },
-  },
-
-  // 6. Women's Watches: Silk and Champagne Reveal
-  women: {
-    initial: { opacity: 0, y: 12, filter: 'blur(3px)' },
-    animate: {
-      opacity: 1,
-      y: 0,
-      filter: 'blur(0px)',
-      transition: { duration: 0.52, ease: [0.25, 1, 0.5, 1] },
-    },
-    exit: { opacity: 0, y: -8, transition: { duration: 0.25 } },
-  },
-
-  // 7. Unisex Watches: Balanced Dual Reveal
-  unisex: {
-    initial: { opacity: 0, scaleY: 0.98 },
-    animate: {
-      opacity: 1,
-      scaleY: 1,
-      transition: { duration: 0.45, ease: 'easeOut' },
-    },
-    exit: { opacity: 0, transition: { duration: 0.25 } },
-  },
-
-  // 8. New Arrivals: Tick-by-Tick Reveal
-  newArrivals: {
-    initial: { opacity: 0, y: 8 },
-    animate: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.4, ease: [0.34, 1.56, 0.64, 1] },
-    },
-    exit: { opacity: 0, transition: { duration: 0.2 } },
-  },
-
-  // 9. Bestsellers: Signature Highlight Sweep
-  bestsellers: {
-    initial: { opacity: 0, scale: 0.99 },
-    animate: {
-      opacity: 1,
-      scale: 1,
-      transition: { duration: 0.45, ease: [0.16, 1, 0.3, 1] },
-    },
-    exit: { opacity: 0, transition: { duration: 0.25 } },
-  },
-
-  // 10. Limited Editions: Numbered Dial Reveal
-  limitedEdition: {
-    initial: { opacity: 0, letterSpacing: '0.05em' },
-    animate: {
-      opacity: 1,
-      letterSpacing: '0em',
-      transition: { duration: 0.55, ease: 'easeOut' },
-    },
-    exit: { opacity: 0, transition: { duration: 0.25 } },
-  },
-
-  // 11. Product Details: Macro Lens Transition
-  productDetails: {
-    initial: { opacity: 0, scale: 0.97, filter: 'blur(3px)' },
-    animate: {
-      opacity: 1,
-      scale: 1,
-      filter: 'blur(0px)',
-      transition: { duration: 0.48, ease: [0.16, 1, 0.3, 1] },
-    },
-    exit: { opacity: 0, scale: 1.02, transition: { duration: 0.25 } },
-  },
-
-  // 12. Compare: Dual Dial Transition
-  compare: {
-    initial: { opacity: 0, scaleX: 0.97 },
-    animate: {
-      opacity: 1,
-      scaleX: 1,
-      transition: { duration: 0.45, ease: [0.16, 1, 0.3, 1] },
-    },
-    exit: { opacity: 0, transition: { duration: 0.25 } },
-  },
-
-  // 13. Watch Finder: Interactive Crown Rotation
-  watchFinder: {
-    initial: { opacity: 0, rotate: 1.2, scale: 0.98 },
-    animate: {
-      opacity: 1,
-      rotate: 0,
-      scale: 1,
-      transition: { duration: 0.5, ease: [0.34, 1.2, 0.64, 1] },
-    },
-    exit: { opacity: 0, rotate: -1, transition: { duration: 0.25 } },
-  },
-
-  // 14. Craftsmanship: Mechanical Assembly Transition
-  craftsmanship: {
-    initial: { opacity: 0, y: 16, scale: 0.98 },
-    animate: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] },
-    },
-    exit: { opacity: 0, y: -12, transition: { duration: 0.25 } },
-  },
-
-  // 15. Journal: Editorial Page Turn
-  journal: {
-    initial: { opacity: 0, y: 12 },
-    animate: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.45, ease: 'easeOut' },
-    },
-    exit: { opacity: 0, transition: { duration: 0.2 } },
-  },
-
-  // 16. About: Timeline Unfold
-  about: {
-    initial: { opacity: 0, scaleY: 0.97 },
-    animate: {
-      opacity: 1,
-      scaleY: 1,
-      transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] },
-    },
-    exit: { opacity: 0, transition: { duration: 0.25 } },
-  },
-
-  // 17. Size Guide: Measurement Grid Reveal
-  sizeGuide: {
-    initial: { opacity: 0, scale: 0.98 },
-    animate: {
-      opacity: 1,
-      scale: 1,
-      transition: { duration: 0.42, ease: 'easeOut' },
-    },
-    exit: { opacity: 0, transition: { duration: 0.2 } },
-  },
-
-  // 18. Cart & Checkout: Precision Tray Slide & Secure Alignment
-  cart: {
-    initial: { opacity: 0, x: 20 },
-    animate: {
-      opacity: 1,
-      x: 0,
-      transition: { duration: 0.35, ease: [0.16, 1, 0.3, 1] },
-    },
-    exit: { opacity: 0, x: -16, transition: { duration: 0.2 } },
-  },
-  checkout: {
-    initial: { opacity: 0, y: 8 },
-    animate: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.32, ease: 'easeOut' },
-    },
-    exit: { opacity: 0, transition: { duration: 0.2 } },
-  },
-
-  // 19. Order Confirmation: Time Completed
-  orderSuccess: {
-    initial: { opacity: 0, scale: 0.95 },
-    animate: {
-      opacity: 1,
-      scale: 1,
-      transition: { duration: 0.55, ease: [0.34, 1.4, 0.64, 1] },
-    },
-    exit: { opacity: 0, transition: { duration: 0.25 } },
-  },
-
-  // 20. Default / Standard Horological Fallback
-  default: {
-    initial: { opacity: 0, y: 6 },
-    animate: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.35, ease: 'easeOut' },
-    },
-    exit: { opacity: 0, transition: { duration: 0.2 } },
-  },
+  home: fade(0, 0, 0.45),
+  shop: fade(-16),
+  collections: fade(0, 10),
+  collectionSlug: fade(0, 10),
+  men: fade(-20),
+  women: fade(0, 12),
+  unisex: fade(0, 8),
+  newArrivals: fade(0, 8),
+  bestsellers: fade(0, 8),
+  limitedEdition: fade(0, 8, 0.45),
+  productDetails: fade(0, 12),
+  compare: fade(0, 8),
+  watchFinder: fade(0, 10),
+  craftsmanship: fade(0, 16, 0.5),
+  journal: fade(0, 12),
+  about: fade(0, 10),
+  sizeGuide: fade(0, 8),
+  cart: fade(20, 0, 0.35),
+  checkout: fade(0, 8, 0.32),
+  orderSuccess: fade(0, 12, 0.5),
+  default: fade(0, 6, 0.35),
 };
 
 export const getRouteTransitionKey = (pathname: string): string => {
@@ -311,6 +109,7 @@ const getCurtainStyle = (key: string): CurtainStyle => {
 const Curtain: React.FC<{ variantStyle: CurtainStyle; label: string }> = ({ variantStyle, label }) => (
   <motion.div
     className="fixed inset-0 z-[150] overflow-hidden"
+    style={{ contain: 'strict' }}
     initial="initial"
     animate="cover"
     exit="reveal"
@@ -320,7 +119,7 @@ const Curtain: React.FC<{ variantStyle: CurtainStyle; label: string }> = ({ vari
       Array.from({ length: 6 }).map((_, i) => (
         <motion.div
           key={i}
-          className="absolute inset-y-0 bg-[#141312] border-r border-gold/25"
+          className="absolute inset-y-0 bg-[#090F1A] border-r border-brand-teal/25"
           style={{ left: `${(i * 100) / 6}%`, width: `${100 / 6 + 0.2}%` }}
           variants={{
             initial: { y: i % 2 ? '101%' : '-101%' },
@@ -333,7 +132,7 @@ const Curtain: React.FC<{ variantStyle: CurtainStyle; label: string }> = ({ vari
     {variantStyle === 'sweep' && (
       <>
         <motion.div
-          className="absolute inset-0 bg-gold"
+          className="absolute inset-0 bg-gradient-to-r from-[#03F008] via-[#02D2C1] to-[#0241FC]"
           variants={{
             initial: { x: '-101%' },
             cover: { x: '0%', transition: { duration: 0.42, ease: EASE } },
@@ -341,7 +140,7 @@ const Curtain: React.FC<{ variantStyle: CurtainStyle; label: string }> = ({ vari
           }}
         />
         <motion.div
-          className="absolute inset-0 bg-[#141312]"
+          className="absolute inset-0 bg-[#090F1A]"
           variants={{
             initial: { x: '-101%' },
             cover: { x: '0%', transition: { duration: 0.46, delay: 0.1, ease: EASE } },
@@ -353,11 +152,12 @@ const Curtain: React.FC<{ variantStyle: CurtainStyle; label: string }> = ({ vari
 
     {variantStyle === 'iris' && (
       <motion.div
-        className="absolute inset-0 bg-[#141312]"
+        className="absolute left-1/2 top-1/2 rounded-full bg-[#090F1A]"
+        style={{ width: '170vmax', height: '170vmax', marginLeft: '-85vmax', marginTop: '-85vmax' }}
         variants={{
-          initial: { clipPath: 'circle(0% at 50% 50%)' },
-          cover: { clipPath: 'circle(75% at 50% 50%)', transition: { duration: 0.55, ease: EASE } },
-          reveal: { clipPath: 'circle(0% at 50% 50%)', transition: { duration: 0.6, ease: EASE } },
+          initial: { scale: 0 },
+          cover: { scale: 1, transition: { duration: 0.5, ease: EASE } },
+          reveal: { scale: 0, transition: { duration: 0.5, ease: EASE } },
         }}
       />
     )}
@@ -421,13 +221,12 @@ export const usePageTransition = () => {
 export const PageStage: React.FC<{ pathname: string; children: React.ReactNode }> = ({ pathname, children }) => {
   const key = getRouteTransitionKey(pathname);
   const variant = routeTransitionVariants[key] || routeTransitionVariants.default;
-  const animate = variant.animate as Record<string, unknown>;
 
   return (
     <motion.div
       initial={variant.initial as never}
-      // Clear residual filters so fixed-position modals keep working.
-      animate={{ ...animate, transitionEnd: { filter: 'none' } } as never}
+      // transform is cleared once settled so fixed-position children stay viewport-relative
+      animate={{ ...(variant.animate as Record<string, unknown>), transitionEnd: { transform: 'none' } } as never}
       className="w-full flex-grow flex flex-col"
     >
       {children}

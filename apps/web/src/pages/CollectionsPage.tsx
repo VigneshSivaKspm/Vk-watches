@@ -40,7 +40,7 @@ export const CollectionsPage: React.FC = () => {
               to={`/collections/${c.slug}`}
               className="group shine aspect-[16/10] md:[&:last-child:nth-child(odd)]:col-span-2 md:[&:last-child:nth-child(odd)]:aspect-[32/11] bg-porcelain rounded-sm overflow-hidden flex flex-col justify-end p-8 border border-platinum hover:shadow-luxe-hover transition-all duration-700"
             >
-              <img
+              <img loading="lazy" decoding="async"
                 src={c.heroImage}
                 alt={c.name}
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105"

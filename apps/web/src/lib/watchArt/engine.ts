@@ -782,10 +782,20 @@ export function watchGroupSvg(d: WatchDesign, uid: string, opts: RenderOptions =
     <clipPath id="${uid}-dialClip"><circle cx="500" cy="500" r="${Rd}"/></clipPath>
     <filter id="${uid}-hs" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="3" dy="6" stdDeviation="3.2" flood-color="#000" flood-opacity=".38"/></filter>
     <filter id="${uid}-soft" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="22"/></filter>
+    <radialGradient id="${uid}-shadow" cx="50%" cy="50%" r="50%">
+      <stop offset=".55" stop-color="#000" stop-opacity=".26"/><stop offset="1" stop-color="#000" stop-opacity="0"/>
+    </radialGradient>
     <filter id="${uid}-drop" x="-30%" y="-20%" width="160%" height="150%"><feDropShadow dx="0" dy="26" stdDeviation="26" flood-color="#000" flood-opacity=".34"/></filter>
   </defs>
 
-  <g filter="url(#${uid}-drop)">
+  ${
+    opts.animate
+      ? // A live (animated) watch repaints every frame, and a 26px blur filter makes that very costly.
+        // A radial-gradient ellipse gives a near-identical soft shadow for free.
+        `<ellipse cx="500" cy="${500 + 30}" rx="${Ro * 1.12}" ry="${Ro * 1.12}" fill="url(#${uid}-shadow)"/>`
+      : ''
+  }
+  <g ${opts.animate ? '' : `filter="url(#${uid}-drop)"`}>
     ${strapSvg(d, uid)}
     ${lugs}
     ${pushers}

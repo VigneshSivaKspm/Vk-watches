@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import { renderWatch, ViewName } from '../../lib/watchArt/engine';
 import { getDesign } from '../../lib/watchArt/designs';
 
@@ -25,8 +25,36 @@ export const LiveWatch: React.FC<LiveWatchProps> = ({ slug, view = 'bare', alt =
     });
   }, [slug, view, alt, uid]);
 
+  const ref = useRef<HTMLDivElement>(null);
+
+  // SMIL animations keep repainting even when off-screen. Pause them unless the
+  // watch is actually visible and the tab is in the foreground.
+  useEffect(() => {
+    const host = ref.current;
+    const svg = host?.querySelector('svg');
+    if (!host || !svg || typeof svg.pauseAnimations !== 'function') return;
+
+    let inView = false;
+    const sync = () => (inView && !document.hidden ? svg.unpauseAnimations() : svg.pauseAnimations());
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        inView = entry.isIntersecting;
+        sync();
+      },
+      { rootMargin: '80px' }
+    );
+    io.observe(host);
+    document.addEventListener('visibilitychange', sync);
+    return () => {
+      io.disconnect();
+      document.removeEventListener('visibilitychange', sync);
+    };
+  }, [markup]);
+
   return (
     <div
+      ref={ref}
       className={`live-watch ${className}`}
       // Markup is generated locally by our own artwork engine (no user input).
       dangerouslySetInnerHTML={{ __html: markup }}
