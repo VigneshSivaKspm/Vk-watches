@@ -28,7 +28,7 @@ async function loadCatalogue(): Promise<CatalogueSnapshot> {
   });
 
   const titles = new Map<string, string>();
-  const rows = products.map((p) => {
+  const rows = products.map((p: (typeof products)[number]) => {
     titles.set(p.slug, p.title);
     const flags = [
       p.isBestseller && 'bestseller',
@@ -48,7 +48,7 @@ async function loadCatalogue(): Promise<CatalogueSnapshot> {
       p.collection?.name.replace(/^The | Collection$/g, '') ?? '-',
       p.specifications?.strapMaterial ?? '-',
       p.specifications ? `${p.specifications.waterResistanceMeters}m` : '-',
-      p.variants.map((v) => v.dialColour).join('/') || '-',
+      p.variants.map((v: (typeof p.variants)[number]) => v.dialColour).join('/') || '-',
       stock,
       flags || '-',
     ].join('|');

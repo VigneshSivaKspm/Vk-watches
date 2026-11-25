@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { Prisma } from '@prisma/client';
 import { prisma } from '../config/prisma';
 import { AuthenticatedRequest } from '../middleware/auth';
 
@@ -83,7 +84,7 @@ export const createOrder = async (req: AuthenticatedRequest, res: Response) => {
     const orderNumber = `VKT-${new Date().getFullYear()}-${timestampStr}${randomHex}`;
 
     // Atomically decrement stock and persist order
-    const order = await prisma.$transaction(async (tx) => {
+    const order = await prisma.$transaction(async (tx: Prisma.TransactionClient) => {
       // Decrement product inventory
       for (const item of items) {
         await tx.product.update({

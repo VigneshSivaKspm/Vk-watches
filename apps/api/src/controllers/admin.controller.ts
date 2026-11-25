@@ -35,7 +35,7 @@ export const getDashboardStats = async (req: AuthenticatedRequest, res: Response
       totalCustomers,
       productsCount,
       lowStockCount,
-      recentOrders: recentOrders.map((o) => ({
+      recentOrders: recentOrders.map((o: (typeof recentOrders)[number]) => ({
         ...o,
         shippingAddress: typeof o.shippingAddress === 'string' ? JSON.parse(o.shippingAddress) : o.shippingAddress,
       })),
@@ -58,7 +58,7 @@ export const getAdminProducts = async (req: Request, res: Response) => {
     });
 
     return res.json(
-      products.map((p) => ({
+      products.map((p: (typeof products)[number]) => ({
         ...p,
         galleryImages: JSON.parse(p.galleryImages || '[]'),
       }))
@@ -156,7 +156,7 @@ export const getAdminOrders = async (req: Request, res: Response) => {
     });
 
     return res.json(
-      orders.map((o) => ({
+      orders.map((o: (typeof orders)[number]) => ({
         ...o,
         shippingAddress: typeof o.shippingAddress === 'string' ? JSON.parse(o.shippingAddress) : o.shippingAddress,
       }))

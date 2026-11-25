@@ -81,7 +81,7 @@ export const getProducts = async (req: Request, res: Response) => {
     ]);
 
     // Format for response
-    const formatted = products.map((p) => ({
+    const formatted = products.map((p: (typeof products)[number]) => ({
       ...p,
       collectionSlug: p.collection?.slug,
       collectionName: p.collection?.name,
@@ -93,7 +93,7 @@ export const getProducts = async (req: Request, res: Response) => {
             wristSizeRangeMm: [p.specifications.wristSizeMinMm, p.specifications.wristSizeMaxMm],
           }
         : null,
-      variants: p.variants.map((v) => ({
+      variants: p.variants.map((v: (typeof p.variants)[number]) => ({
         ...v,
         imageUrls: JSON.parse(v.imageUrls || '[]'),
       })),
@@ -143,7 +143,7 @@ export const getProductBySlug = async (req: Request, res: Response) => {
             wristSizeRangeMm: [product.specifications.wristSizeMinMm, product.specifications.wristSizeMaxMm],
           }
         : null,
-      variants: product.variants.map((v) => ({
+      variants: product.variants.map((v: (typeof product.variants)[number]) => ({
         ...v,
         imageUrls: JSON.parse(v.imageUrls || '[]'),
       })),
@@ -173,7 +173,7 @@ export const getComparison = async (req: Request, res: Response) => {
       },
     });
 
-    const formatted = products.map((p) => ({
+    const formatted = products.map((p: (typeof products)[number]) => ({
       ...p,
       galleryImages: JSON.parse(p.galleryImages || '[]'),
       specifications: p.specifications
@@ -204,7 +204,7 @@ export const watchFinderRecommend = async (req: Request, res: Response) => {
     });
 
     // Score each product based on customer answers
-    const scored = allProducts.map((p) => {
+    const scored = allProducts.map((p: (typeof allProducts)[number]) => {
       let score = 0;
       const reasons: string[] = [];
 
@@ -258,7 +258,7 @@ export const watchFinderRecommend = async (req: Request, res: Response) => {
     });
 
     // Sort descending by match score
-    scored.sort((a, b) => b.score - a.score);
+    scored.sort((a: (typeof scored)[number], b: (typeof scored)[number]) => b.score - a.score);
 
     return res.json(scored.slice(0, 3));
   } catch (error) {
@@ -277,7 +277,7 @@ export const getCollections = async (req: Request, res: Response) => {
       },
     });
 
-    const formatted = collections.map((c) => ({
+    const formatted = collections.map((c: (typeof collections)[number]) => ({
       ...c,
       productCount: c._count.products,
     }));

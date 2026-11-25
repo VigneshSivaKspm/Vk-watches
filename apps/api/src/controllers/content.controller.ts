@@ -8,7 +8,7 @@ export const getJournalArticles = async (req: Request, res: Response) => {
     });
 
     return res.json(
-      articles.map((a) => ({
+      articles.map((a: (typeof articles)[number]) => ({
         ...a,
         tags: JSON.parse(a.tags || '[]'),
       }))
