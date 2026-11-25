@@ -1,9 +1,7 @@
+import './config/env'; // keep first
 import express from 'express';
 import cors from 'cors';
-import dotenv from 'dotenv';
 import apiRouter from './routes';
-
-dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 4000;
